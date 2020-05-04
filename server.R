@@ -4,9 +4,7 @@ options(shiny.jquery.version=1)
 library(shiny)
 library(gentelellaShiny)
 library(shinyWidgets)
-library(leaflet)
 library(bsplus)
-library(ggplot2)
 
 # Incluye todos los archivos con el prefijo server para que esten disponibles al renderizar el app
 file.sources = list.files(pattern = "server_.+\\.R")
