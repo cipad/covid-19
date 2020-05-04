@@ -34,7 +34,7 @@ fx_diacovid_crc = function(psFecha = ""){
   ds_contagiospais = readRDS(file.path(sDirDatos,"st_contagiopais.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagios$fecha)
+    psFecha = max(ds_contagiospais$fecha)
   }
   
   ds_contagiospais[ ds_contagiospais$fecha == psFecha , c( "dia_covid19", "fecha")]
