@@ -1,3 +1,5 @@
+
+#prueba
 options(shiny.jquery.version=1)
 library(shiny)
 library(gentelellaShiny)
