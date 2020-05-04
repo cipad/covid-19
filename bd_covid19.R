@@ -111,28 +111,3 @@ fx_corte_status_pais_mapa = function(psFecha = "") {
                        "positivos","recuperados","fallecidos","activos",
                        "latitud","longitud") ]
 }
-
-
-
-
-
-fx_historico_variable_pais("positivos_nuevos")
-fx_historico_variable_pais(c("positivos_nuevos","recuperados_nuevos"),psFecha = "2020-04-18" ,pnDias = 10 )
-
-
-install.packages("fst", dependencies = TRUE)
-x = data.frame(installed.packages())
-x[x$Package=="fst",c("Package","Version","Built")]
-
-
-sArchivo = "st_contagiopais"
-yArch = readRDS(file.path(sDirDatos,paste0(sArchivo,".rds")) )
-fst::write.fst(x=yArch, path = file.path(sDirDatos,paste(sArchivo,".fst")) )
-
-xArch = fst::read.fst(  path = file.path(sDirDatos,paste(sArchivo,".fst")) )
-identical(xArch, yArch)
-class(xArch)
-class(yArch)
-nrow(xArch)
-nrow(yArch)
-head(yArch)
