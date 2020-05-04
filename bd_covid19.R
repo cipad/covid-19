@@ -14,6 +14,10 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                  by = c("canton"),
                  all.x = TRUE
           )
+
+  dfRet$tasa_contagio = dfRet$positivos / dfRet$poblacion
+  #dfRet$tasa_densidad_contagio = dfRet$positivos / dfRet$extension
+
   dfRet
 }
 
