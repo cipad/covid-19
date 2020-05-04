@@ -1,3 +1,4 @@
+library(xts)
 source("bd_covid19.R")
 
 positivos_nuevos_serie <- renderDygraph({

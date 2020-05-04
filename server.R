@@ -6,7 +6,6 @@ library(gentelellaShiny)
 library(shinyWidgets)
 library(dygraphs)
 library(leaflet)
-library(xts)
 library(bsplus)
 library(ggplot2)
 

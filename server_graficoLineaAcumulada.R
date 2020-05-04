@@ -1,3 +1,5 @@
+library(xts)
+
 source("bd_covid19.R")
 estatus_pais_acumulado = fx_corte_status_pais_acumulado()
 
