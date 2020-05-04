@@ -1,5 +1,5 @@
+source("bd_covid19.R")
 ultimafechaConDatos = fx_diacovid_crc()$fecha
-print(ultimafechaConDatos)
 fechaInicioDatosPorCanton = "2020-03-15"
 
 tabCanton = tabItem(

@@ -3,7 +3,7 @@ file.sources = list.files(pattern = "ui_.+\\.R")
 sapply(file.sources, source)
 
 # Funcion covidUI principal que renderiza la aplicación
-ui = gentelellaPageCustom(
+ui = shinyUI(gentelellaPageCustom(
   title = "COVID-19",
   navbar = gentelellaNavbar(),
   sidebar = sidebar,
@@ -15,4 +15,4 @@ ui = gentelellaPageCustom(
     tabs
   ),
   footer = gentelellaFooter(leftText = "Centro de Investigación en Procesamiento y Análisis de Datos", rightText = "2020")
-)
+))
