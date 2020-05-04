@@ -1,3 +1,5 @@
+source("bd_covid19.R")
+
 positivos_nuevos_serie <- renderDygraph({
   dataPositivos = fx_historico_variable_pais("positivos_nuevos")
   

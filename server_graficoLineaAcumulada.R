@@ -1,3 +1,4 @@
+source("bd_covid19.R")
 estatus_pais_acumulado = fx_corte_status_pais_acumulado()
 
 positivos <- xts(x = estatus_pais_acumulado$positivos, order.by = estatus_pais_acumulado$fecha)

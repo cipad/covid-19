@@ -1,3 +1,4 @@
+source("bd_covid19.R")
 estatus_pais = fx_corte_status_pais()
 
 blank_theme <- theme_minimal()+

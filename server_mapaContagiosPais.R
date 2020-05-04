@@ -1,3 +1,5 @@
+source("bd_covid19.R")
+
 # PARAMETROS ----
 pFactorRadio=50
 
