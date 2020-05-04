@@ -1,4 +1,5 @@
-fechaHoy = as.Date(format(as.POSIXct(Sys.time()),usetz=TRUE, tz="Etc/GMT+6"), format = "%Y-%m-%d")
+ultimafechaConDatos = fx_diacovid_crc()$fecha
+print(ultimafechaConDatos)
 fechaInicioDatosPorCanton = "2020-03-15"
 
 tabCanton = tabItem(
@@ -15,9 +16,9 @@ tabCanton = tabItem(
       dateInput(
         "fechaCorteCanton",
         "Fecha del Corte:",
-        value = fechaHoy,
+        value = ultimafechaConDatos,
         min = fechaInicioDatosPorCanton,
-        max = fechaHoy,
+        max = ultimafechaConDatos,
         language = "es"
       )
     )
