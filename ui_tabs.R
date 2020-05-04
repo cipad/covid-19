@@ -1,0 +1,4 @@
+tabs = tabItems(
+  tabInicio,
+  tabCanton
+)
