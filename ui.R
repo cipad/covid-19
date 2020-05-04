@@ -3,7 +3,7 @@ file.sources = list.files(pattern = "ui_.+\\.R")
 sapply(file.sources, source)
 
 # Funcion covidUI principal que renderiza la aplicación
-covidUI = gentelellaPageCustom(
+ui = gentelellaPageCustom(
   title = "COVID-19",
   navbar = gentelellaNavbar(),
   sidebar = sidebar,

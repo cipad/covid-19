@@ -19,7 +19,7 @@ source("bd_covid19.R")
 # LECTURA DATOS ---- 
 estatus_pais = fx_corte_status_pais()
 
-covidServer = function(input, output, session) {
+server = function(input, output, session) {
 
   output$profile <- renderUI({
     tagList(
