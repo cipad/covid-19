@@ -1,3 +1,4 @@
+library(leaflet)
 source("bd_covid19.R")
 
 # PARAMETROS ----
