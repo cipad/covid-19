@@ -1,3 +1,5 @@
+library(mapdeck)
+
 source("bd_covid19.R")
 ultimafechaConDatos = fx_diacovid_crc()$fecha
 fechaInicioDatosPorCanton = "2020-03-15"
