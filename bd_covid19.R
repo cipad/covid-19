@@ -38,8 +38,8 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
 # }
 
 
-#fx_historico_movilidad_canton_mapa("ATENAS")
-fx_historico_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
+#fx_movilidad_canton_mapa("ATENAS")
+fx_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
   
   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
 
