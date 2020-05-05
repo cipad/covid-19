@@ -37,7 +37,6 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
 #   ds_movilidad[ds_movilidad$direccion == psDireccion, c("fecha","hora","delta","z_score")]
 # }
 
-fx_movilidad_canton_mapa("PUNTARENAS")
 
 fx_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
   #psCanton = "ABANGARES"
@@ -54,9 +53,9 @@ fx_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
   # filtra por la hora
   ds_movilidad = ds_movilidad[ds_movilidad$hora == ifelse(psHora=="",max(ds_movilidad$hora),psHora), ]
 
-  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 3 * (ds_movilidad$z_score ^ 2), NA)
+  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 3 * (ds_movilidad$z_score ^ 2), -1)
   
-  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 3 * (ds_movilidad$z_score ^ 2), NA) 
+  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 3 * (ds_movilidad$z_score ^ 2), -1) 
 
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
 
