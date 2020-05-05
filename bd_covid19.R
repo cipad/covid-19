@@ -59,7 +59,7 @@ fx_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
 
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
 
-  ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora","z_score_sube","z_score_baja","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino")]
+  ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora", "z_score","z_score_sube","z_score_baja","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino")]
 }
 
 
