@@ -78,7 +78,7 @@ server = shinyServer(function(input, output, session) {
         estatus_canton_recuperados(estado_canton$recuperados)
         estatus_canton_fallecidos(estado_canton$fallecidos)
         
-        SetDatos = fx_movilidad_canton_mapa(cantones[1])
+        SetDatos = fx_movilidad_canton_mapa(cantones[1], format(input$fechaCorteCanton, "%Y-%m-%d"))
         if (nrow(SetDatos) > 0){
           
           SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
@@ -154,7 +154,7 @@ server = shinyServer(function(input, output, session) {
       output$estatus_canton_recuperados = renderText({ estatus_canton_recuperados() })
       output$estatus_canton_fallecidos = renderText({ estatus_canton_fallecidos() })
       
-      SetDatos = fx_movilidad_canton_mapa(input$seleccionCanton)
+      SetDatos = fx_movilidad_canton_mapa(input$seleccionCanton, format(input$fechaCorteCanton, "%Y-%m-%d"))
       
       if (nrow(SetDatos) > 0){
         SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
