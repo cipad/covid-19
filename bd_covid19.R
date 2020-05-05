@@ -14,12 +14,56 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                  by = c("canton"),
                  all.x = TRUE
           )
-
+  
   dfRet$tasa_contagio = dfRet$positivos / dfRet$poblacion
   #dfRet$tasa_densidad_contagio = dfRet$positivos / dfRet$extension
-
+   
   dfRet
 }
+
+#fx_historico_movilidad_canton("ATENAS")
+# fx_historico_movilidad_canton = function(psCanton, psDireccion = "S", psFecha = ""){
+# 
+#   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
+# 
+#   if (psFecha == "") {
+#     psFecha = max(ds_movilidad$fecha)
+#   }
+#   
+#   ds_movilidad = ds_movilidad[ds_movilidad$fecha <= psFecha & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","delta","z_score","canton_origen", "canton_destino") ]
+# 
+#   ds_movilidad$direccion = ifelse(ds_movilidad$canton_origen == psCanton,"S","E")
+# 
+#   ds_movilidad[ds_movilidad$direccion == psDireccion, c("fecha","hora","delta","z_score")]
+# }
+
+
+#fx_historico_movilidad_canton_mapa("ATENAS")
+fx_historico_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
+  
+  ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
+
+  if (psFecha == "") {
+    psFecha = max(ds_movilidad$fecha)
+  }
+  
+  # filtra por fecha y canton
+  ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
+  
+  # filtra por la hora
+  ds_movilidad = ds_movilidad[ds_movilidad$hora == ifelse(psHora=="",max(ds_movilidad$hora),psHora), ]
+
+  
+  ds_movilidad$z_score_sube = ds_movilidad$z_score
+  
+  ds_movilidad$z_score_baja = ds_movilidad$z_score * -1
+
+  ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
+
+  ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora","z_score_sube","z_score_baja","z_score_cuadrado","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino")]
+}
+
+
 
 fx_cantones_covid = function(psFecha = ""){
   
@@ -38,7 +82,7 @@ fx_diacovid_crc = function(psFecha = ""){
   ds_contagiospais = readRDS(file.path(sDirDatos,"st_contagiopais.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagiospais$fecha)
+    psFecha = max(ds_contagios$fecha)
   }
   
   ds_contagiospais[ ds_contagiospais$fecha == psFecha , c( "dia_covid19", "fecha")]
