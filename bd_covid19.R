@@ -37,6 +37,8 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
 #   ds_movilidad[ds_movilidad$direccion == psDireccion, c("fecha","hora","delta","z_score")]
 # }
 
+fx_movilidad_canton_mapa("PUNTARENAS")
+
 fx_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
   #psCanton = "ABANGARES"
   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
@@ -46,19 +48,22 @@ fx_movilidad_canton_mapa = function(psCanton, psFecha = "", psHora = ""){
   }
   
   # filtra por fecha y canton
-  ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
+  ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & (ds_movilidad$canton_destino == psCanton), c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
+  # ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
   
   # filtra por la hora
   ds_movilidad = ds_movilidad[ds_movilidad$hora == ifelse(psHora=="",max(ds_movilidad$hora),psHora), ]
 
-  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 2 * (ds_movilidad$z_score ^ 2), NA)
+  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 3 * (ds_movilidad$z_score ^ 2), NA)
   
-  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 2 * (ds_movilidad$z_score ^ 2), NA) 
+  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 3 * (ds_movilidad$z_score ^ 2), NA) 
 
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
 
   ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora","z_score_sube","z_score_baja","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino")]
 }
+
+
 
 fx_cantones_covid = function(psFecha = ""){
   
