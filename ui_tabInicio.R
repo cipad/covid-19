@@ -12,7 +12,7 @@ tabInicio = tabItem(
   fluidRow(
     column(
       3,
-      accordionItem("positivos_nuevos", estatus_pais$positivos_nuevos, "fa fa-plus", "Positivos", "Nuevos pacientes con prueba positiva", 
+      accordionItem("positivos_nuevos", estatus_pais$positivos_nuevos, "fa fa-plus", "Positivos", "Nuevos pacientes con prueba positiva ▼", 
                     fluidRow(
                       column(
                         12,
@@ -28,7 +28,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
-      accordionItem("recuperados_nuevos", estatus_pais$recuperados_nuevos, "fa fa-smile-o", "Recuperados", "Pacientes COVID con prueba negativa", 
+      accordionItem("recuperados_nuevos", estatus_pais$recuperados_nuevos, "fa fa-smile-o", "Recuperados", "Pacientes COVID con prueba negativa ▼", 
                     fluidRow(
                       column(
                         12,
@@ -44,7 +44,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
-      accordionItem("hospitalizados_nuevos", estatus_pais$hospitalizados_nuevos, "fa fa-hospital-o", "Hospitalizados", "Pacientes en hospital", 
+      accordionItem("hospitalizados_nuevos", estatus_pais$hospitalizados_nuevos, "fa fa-hospital-o", "Hospitalizados", "Pacientes en hospital ▼", 
                     fluidRow(
                       column(
                         12,
@@ -60,7 +60,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
-      accordionItem("fallecidos_nuevos", estatus_pais$fallecidos_nuevos, "fa fa-frown-o", "Fallecidos", "Desde el último reporte del MS", 
+      accordionItem("fallecidos_nuevos", estatus_pais$fallecidos_nuevos, "fa fa-frown-o", "Fallecidos", "Desde el último reporte del MS ▼", 
                     fluidRow(
                       column(
                         12,
@@ -84,7 +84,7 @@ tabInicio = tabItem(
   fluidRow(
     column(
       3,
-      accordionItem("positivos", estatus_pais$positivos, "fa fa-plus", "Positivos", "Pacientes con prueba positiva",
+      accordionItem("positivos", estatus_pais$positivos, "fa fa-plus", "Positivos", "Pacientes con prueba positiva ▼",
                     fluidRow(
                       column(
                         12,
@@ -111,7 +111,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
-      accordionItem("recuperados", estatus_pais$recuperados, "fa fa-smile-o", "Recuperados", "Pacientes COVID con prueba negativa",
+      accordionItem("recuperados", estatus_pais$recuperados, "fa fa-smile-o", "Recuperados", "Pacientes COVID con prueba negativa ▼",
                     fluidRow(
                       column(
                         12,
@@ -132,7 +132,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
-      accordionItem("hospitalizados", estatus_pais$hospitalizados, "fa fa-hospital-o", "Hospitalizados", "Pacientes en hospital al día de hoy",
+      accordionItem("hospitalizados", estatus_pais$hospitalizados, "fa fa-hospital-o", "Hospitalizados", "Pacientes en hospital al día de hoy ▼",
                     fluidRow(
                       column(
                         12,
@@ -148,7 +148,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
-      accordionItem("fallecidos", estatus_pais$fallecidos, "fa fa-frown-o", "Fallecidos", "Fallecimientos totales",
+      accordionItem("fallecidos", estatus_pais$fallecidos, "fa fa-frown-o", "Fallecidos", "Fallecimientos totales ▼",
                     fluidRow(
                       column(
                         12,
@@ -166,8 +166,22 @@ tabInicio = tabItem(
     tags$hr()
   ),
   fluidRow(
+    tags$h3("Contagios por Canton")
+  ),
+  fluidRow(
+    column(12,
+           mapdeckOutput("mapaCasosCanton", height = 470)
+    )
+  ),
+  fluidRow(
+    tags$hr()
+  ),
+  fluidRow(
+    tags$h3("Resumen de datos")
+  ),
+  fluidRow(
     column(6,
-           mapdeckOutput("mapaContagiosPais", height = 470)
+           leafletOutput("mapaContagiosPais", height = 470)
     ),
     column(6,
            graph_box(dygraphOutput("graficoLineaAcumulada"),
