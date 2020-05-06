@@ -1,5 +1,7 @@
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
+# names(ds_contagios)
+# fx_corte_status_canton_acumulado("ALAJUELA")
 fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
   
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
@@ -15,6 +17,7 @@ fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
   dfRet[order(dfRet$fecha),]
 }
 
+
 fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDias = 7){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
@@ -26,6 +29,7 @@ fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDi
   ds_contagios[ ds_contagios$canton == psCanton & ds_contagios$fecha > psInicio & ds_contagios$fecha <= psFecha , 
                     union(c("fecha"),psVariable)]
 }
+
 
 fx_corte_status_canton = function(psCanton, psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
@@ -43,6 +47,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   
   dfRet$tasa_contagio = dfRet$positivos / dfRet$poblacion
   dfRet$tasa_densidad_contagio = dfRet$positivos / dfRet$extension
+  dfRet$densidad_poblacional = dfRet$poblacion / dfRet$extension
   
   dfRet
 }
@@ -87,8 +92,6 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   
   ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora", "z_score","z_score_sube","z_score_baja","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino")]
 }
-
-
 
 fx_cantones_covid = function(psFecha = ""){
   
@@ -171,7 +174,7 @@ fx_corte_status_pais_acumulado = function(psFecha = "") {
 }
 
 
-fx_corte_status_pais_mapa = function(psFecha = "") {
+fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   
   ds_contagioscanton = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
@@ -179,8 +182,16 @@ fx_corte_status_pais_mapa = function(psFecha = "") {
     psFecha = max(ds_contagioscanton$fecha)
   }
   
-  ds_contagioscanton[ ds_contagioscanton$fecha == psFecha, 
-                      c( "fecha", "canton", 
-                         "positivos","recuperados","fallecidos","activos",
-                         "latitud","longitud") ]
+  if (pnAcumula == 0) {
+    dfRet = ds_contagioscanton[ ds_contagioscanton$fecha == psFecha, 
+                        c( "fecha", "canton", 
+                           "positivos","recuperados","fallecidos","activos",
+                           "latitud","longitud") ]
+  } else {
+    dfRet = ds_contagioscanton[ ds_contagioscanton$fecha <= psFecha, 
+                                c( "fecha", "canton", 
+                                   "positivos","recuperados","fallecidos","activos",
+                                   "latitud","longitud") ]
+  }
+  dfRet
 }
