@@ -30,11 +30,15 @@ fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDi
                     union(c("fecha"),psVariable)]
 }
 
-
+# fx_corte_status_canton("ATENAS")
 fx_corte_status_canton = function(psCanton, psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   ds_cantones = readRDS(file.path(sDirDatos,"integradocantonal.rds"))
   ds_distritos = readRDS(file.path(sDirDatos,"integradodistrital.rds"))
+  df_ws = ds_distritos %>%
+                select(canton, walkscore) %>%
+                group_by(canton) %>%
+                summarise(ws_min = min(walkscore), ws_max = max(walkscore), ws_avg = mean(walkscore))
 
   if (psFecha == "") {
     psFecha = max(ds_contagios$fecha)
@@ -46,8 +50,13 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                  all.x = TRUE
   )
   
-  # ds_distritos
+  dfRet = merge( dfRet,
+                 df_ws,
+                 by = c("canton"),
+                 all.x = TRUE
+  )
   
+
   dfRet$tasa_mortalidad = round(dfRet$tasa_mortalidad, 1)
   dfRet$tasa_natalidad = round(dfRet$tasa_natalidad, 1)
   dfRet$tasa_nupcialidad = round(dfRet$tasa_nupcialidad, 1)
@@ -83,9 +92,9 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   
   ds_movilidad = ds_movilidad[ds_movilidad$hora == psHora, ]
   
-  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 2*sqrt(ds_movilidad$z_score), -1)
+  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 2*sqrt(abs(ds_movilidad$z_score)), -1)
   
-  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 2*sqrt(ds_movilidad$z_score), -1) 
+  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 2*sqrt(abs(ds_movilidad$z_score)), -1) 
   
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
   
