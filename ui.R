@@ -9,6 +9,7 @@ ui = shinyUI(gentelellaPageCustom(
   sidebar = sidebar,
   body = gentelellaBody(
     includeCSS("dashboard.css"),
+    tags$head(includeHTML(("analytics.html"))),
     tags$script(HTML(
       '$(document).ready(function(){$(".collapse").each((i, item) => { $(item).removeClass("in") });});'
     )),
