@@ -15,5 +15,5 @@ ui = shinyUI(gentelellaPageCustom(
     )),
     tabs
   ),
-  footer = gentelellaFooter(leftText = "Centro de Investigación en Procesamiento y Análisis de Datos (info@cipadcr.com)", rightText = "2020")
+  footer = gentelellaFooter(leftText = tags$span(tags$span("Centro de Investigación en Procesamiento y Análisis de Datos"), tags$a(href="mailto:info@cipadcr.com","info@cipadcr.com")), rightText = "2020")
 ))
