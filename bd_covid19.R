@@ -1,5 +1,20 @@
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
+fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
+  
+  ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
+  
+  if (psFecha == "") {
+    psFecha = max(ds_contagios$fecha)
+  }
+  
+  dfRet = ds_contagios[ ds_contagios$canton == psCanton & ds_contagios$fecha <= psFecha, 
+                        c( "fecha",
+                           "positivos","recuperados","fallecidos","activos") ]
+  dfRet = dfRet[!is.na(dfRet$fecha),]
+  dfRet[order(dfRet$fecha),]
+}
+
 fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDias = 7){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
