@@ -38,7 +38,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   df_ws = ds_distritos %>%
                 select(canton, walkscore) %>%
                 group_by(canton) %>%
-                summarise(ws_min = min(walkscore), ws_max = max(walkscore), ws_avg = mean(walkscore))
+                summarise(ws_min = round(min(walkscore),1), ws_max = round(max(walkscore),1), ws_avg = round(mean(walkscore),1))
 
   if (psFecha == "") {
     psFecha = max(ds_contagios$fecha)
@@ -57,6 +57,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   )
   
 
+  dfRet$ids_2017 = round(dfRet$ids_2017, 1)
   dfRet$tasa_mortalidad = round(dfRet$tasa_mortalidad, 1)
   dfRet$tasa_natalidad = round(dfRet$tasa_natalidad, 1)
   dfRet$tasa_nupcialidad = round(dfRet$tasa_nupcialidad, 1)
@@ -92,9 +93,9 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   
   ds_movilidad = ds_movilidad[ds_movilidad$hora == psHora, ]
   
-  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 2*sqrt(abs(ds_movilidad$z_score)), -1)
+  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, ds_movilidad$z_score^2, -1)
   
-  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 2*sqrt(abs(ds_movilidad$z_score)), -1) 
+  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, ds_movilidad$z_score^2, -1) 
   
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
   
@@ -203,4 +204,3 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   }
   dfRet
 }
-
