@@ -46,7 +46,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                  all.x = TRUE
   )
   
-  ds_distritos
+  # ds_distritos
   
   dfRet$tasa_mortalidad = round(dfRet$tasa_mortalidad, 1)
   dfRet$tasa_natalidad = round(dfRet$tasa_natalidad, 1)
@@ -59,7 +59,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   dfRet
 }
 
-# fx_movilidad_canton_mapa("CARTAGO",pnZScore = 0, psHora = 8)
+# fx_movilidad_canton_mapa("ALAJUELITA", pnZScore = 0, psFecha = "2020-05-03", psHora = 16)
 fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora = ""){
   #psCanton = "ABANGARES"
   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
@@ -83,9 +83,9 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   
   ds_movilidad = ds_movilidad[ds_movilidad$hora == psHora, ]
   
-  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, (ds_movilidad$z_score ^ 2), -1)
+  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 2*sqrt(ds_movilidad$z_score), -1)
   
-  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, (ds_movilidad$z_score ^ 2), -1) 
+  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 2*sqrt(ds_movilidad$z_score), -1) 
   
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
   
@@ -194,3 +194,4 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   }
   dfRet
 }
+
