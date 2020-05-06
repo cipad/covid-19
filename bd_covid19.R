@@ -34,6 +34,7 @@ fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDi
 fx_corte_status_canton = function(psCanton, psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   ds_cantones = readRDS(file.path(sDirDatos,"integradocantonal.rds"))
+  ds_distritos = readRDS(file.path(sDirDatos,"integradodistrital.rds"))
 
   if (psFecha == "") {
     psFecha = max(ds_contagios$fecha)
@@ -44,6 +45,8 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                  by = c("canton"),
                  all.x = TRUE
   )
+  
+  ds_distritos
   
   dfRet$tasa_mortalidad = round(dfRet$tasa_mortalidad, 1)
   dfRet$tasa_natalidad = round(dfRet$tasa_natalidad, 1)
@@ -56,7 +59,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   dfRet
 }
 
-# fx_movilidad_canton_mapa("ATENAS",pnZScore = 2)
+# fx_movilidad_canton_mapa("CARTAGO",pnZScore = 0, psHora = 8)
 fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora = ""){
   #psCanton = "ABANGARES"
   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
@@ -66,15 +69,23 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   }
   
   # filtra por fecha y canton
-  ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & abs(ds_movilidad$z_score) >= pnZScore, c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
+  ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & abs(ds_movilidad$z_score) >= pnZScore & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
   # ds_movilidad = ds_movilidad[ds_movilidad$fecha == psFecha & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","z_score","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino","n_lineabase") ]
   
   # filtra por la hora
-  ds_movilidad = ds_movilidad[ds_movilidad$hora == ifelse(psHora=="",max(ds_movilidad$hora),psHora), ]
+  if (psHora == ""){
+    psHora = max(ds_movilidad$hora)
+  } else {
+    #psHora = 24
+    psHora = as.numeric(psHora)-8
+    psHora = paste0(ifelse(psHora <= 8, "0", ""),psHora,":00")
+  }
   
-  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, 3 * (ds_movilidad$z_score ^ 2), -1)
+  ds_movilidad = ds_movilidad[ds_movilidad$hora == psHora, ]
   
-  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, 3 * (ds_movilidad$z_score ^ 2), -1) 
+  ds_movilidad$z_score_sube = ifelse(ds_movilidad$z_score>0, (ds_movilidad$z_score ^ 2), -1)
+  
+  ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, (ds_movilidad$z_score ^ 2), -1) 
   
   # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
   
@@ -183,4 +194,3 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   }
   dfRet
 }
-
