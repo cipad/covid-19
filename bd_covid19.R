@@ -45,28 +45,16 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                  all.x = TRUE
   )
   
-  dfRet$tasa_contagio = dfRet$positivos / dfRet$poblacion
-  dfRet$tasa_densidad_contagio = dfRet$positivos / dfRet$extension
-  dfRet$densidad_poblacional = dfRet$poblacion / dfRet$extension
+  dfRet$tasa_mortalidad = round(dfRet$tasa_mortalidad, 1)
+  dfRet$tasa_natalidad = round(dfRet$tasa_natalidad, 1)
+  dfRet$tasa_nupcialidad = round(dfRet$tasa_nupcialidad, 1)
+  
+  dfRet$tasa_contagio = round(1000 * dfRet$positivos / dfRet$poblacion, 1)
+  dfRet$tasa_densidad_contagio = round(dfRet$positivos / dfRet$extension,1)
+  dfRet$densidad_poblacional = round(dfRet$poblacion / dfRet$extension,1)
   
   dfRet
 }
-
-#fx_historico_movilidad_canton("ATENAS")
-# fx_historico_movilidad_canton = function(psCanton, psDireccion = "S", psFecha = ""){
-# 
-#   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
-# 
-#   if (psFecha == "") {
-#     psFecha = max(ds_movilidad$fecha)
-#   }
-# 
-#   ds_movilidad = ds_movilidad[ds_movilidad$fecha <= psFecha & (ds_movilidad$canton_origen == psCanton | ds_movilidad$canton_destino == psCanton), c("fecha","hora","delta","z_score","canton_origen", "canton_destino") ]
-# 
-#   ds_movilidad$direccion = ifelse(ds_movilidad$canton_origen == psCanton,"S","E")
-# 
-#   ds_movilidad[ds_movilidad$direccion == psDireccion, c("fecha","hora","delta","z_score")]
-# }
 
 # fx_movilidad_canton_mapa("ATENAS",pnZScore = 2)
 fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora = ""){
@@ -195,3 +183,4 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   }
   dfRet
 }
+
