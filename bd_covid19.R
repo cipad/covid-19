@@ -1,6 +1,5 @@
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
-# names(ds_contagios)
 # fx_corte_status_canton_acumulado("ALAJUELA")
 fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
   
@@ -35,6 +34,8 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   ds_cantones = readRDS(file.path(sDirDatos,"integradocantonal.rds"))
   ds_distritos = readRDS(file.path(sDirDatos,"integradodistrital.rds"))
+  ds_mapa_ws = readRDS(file.path(sDirDatos,"mapa_walkscore.rds"))
+  
   df_ws = ds_distritos %>%
                 select(canton, walkscore) %>%
                 group_by(canton) %>%
@@ -52,6 +53,13 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   
   dfRet = merge( dfRet,
                  df_ws,
+                 by = c("canton"),
+                 all.x = TRUE
+  )
+  
+  
+  dfRet = merge( dfRet,
+                 ds_mapa_ws[ds_mapa_ws$modo=="walk" & ds_mapa_ws$canton==psCanton, c("canton","mapa_ws")],
                  by = c("canton"),
                  all.x = TRUE
   )
