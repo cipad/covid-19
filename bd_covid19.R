@@ -1,5 +1,16 @@
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
+fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDias = 7){
+  ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
+  
+  if (psFecha == "") {
+    psFecha = max(ds_contagios$fecha)
+  }
+  psInicio = as.Date(psFecha) - pnDias
+  
+  ds_contagios[ ds_contagios$canton == psCanton & ds_contagios$fecha > psInicio & ds_contagios$fecha <= psFecha , 
+                    union(c("fecha"),psVariable)]
+}
 
 fx_corte_status_canton = function(psCanton, psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
