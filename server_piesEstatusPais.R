@@ -55,7 +55,7 @@ pie_positivos_nacionalidad <- renderPlot({
     geom_bar(width = 1, stat = "identity")
   bp
   pie <- bp + coord_polar("y", start=0)
-  pieNacionalidad = pie + scale_fill_brewer("Grupo de Edad") + blank_theme +
+  pieNacionalidad = pie + scale_fill_brewer("Nacionalidad") + blank_theme +
     theme(axis.text.x=element_blank())
   pieNacionalidad
 })
@@ -118,7 +118,7 @@ pie_fallecidos_genero <- renderPlot({
     geom_bar(width = 1, stat = "identity")
   bp
   pie <- bp + coord_polar("y", start=0)
-  pieGenero = pie + scale_fill_brewer("Sección") + blank_theme +
+  pieGenero = pie + scale_fill_brewer("Género") + blank_theme +
     theme(axis.text.x=element_blank())
   pieGenero
 }) 
