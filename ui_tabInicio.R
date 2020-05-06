@@ -167,7 +167,7 @@ tabInicio = tabItem(
   ),
   fluidRow(
     column(6,
-           leafletOutput("mapaContagiosPais", height = 470)
+           mapdeckOutput("mapaContagiosPais", height = 470)
     ),
     column(6,
            graph_box(dygraphOutput("graficoLineaAcumulada"),

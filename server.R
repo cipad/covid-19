@@ -16,6 +16,9 @@ source("bd_covid19.R")
 # LECTURA DATOS ---- 
 estatus_pais = fx_corte_status_pais()
 
+key="pk.eyJ1IjoibWlub3Jib25pbGxhZ29tZXoiLCJhIjoiY2s5cGF4dzN4MDk2MjNkb2RxbjNrcDZ2aiJ9.fSjAKiPHJyCbtkD6u7hRvA"
+set_token(key)
+
 server = shinyServer(function(input, output, session) {
   
   output$profile <- renderUI({
@@ -140,9 +143,6 @@ server = shinyServer(function(input, output, session) {
     
   })
   
-  key="pk.eyJ1IjoibWlub3Jib25pbGxhZ29tZXoiLCJhIjoiY2s5cGF4dzN4MDk2MjNkb2RxbjNrcDZ2aiJ9.fSjAKiPHJyCbtkD6u7hRvA"
-  set_token(key)
-  
   observeEvent(input$seleccionCanton, {
     if (nchar(input$seleccionCanton) > 0){
       estado_canton = fx_corte_status_canton(input$seleccionCanton, format(input$fechaCorteCanton, "%Y-%m-%d"))
@@ -198,5 +198,32 @@ server = shinyServer(function(input, output, session) {
         }) 
       }
     }
+  })
+  
+  observeEvent(input$abrirInfoMovilidad, {
+    showModal(modalDialog(
+      title = "Movilidad Humana",
+      div(tags$p("En esta sección se presentan los gráficos de movilidad humana separados por el criterio REDUCCIÓN e INCREMENTO, haciendo cada uno de ellos 
+referencia al patrón de comportamiento observado en la muestra de la población analizada (cerca de 230mil personas en cada bloque)."), 
+tags$p("Los datos miden el movimiento humano contabilizandolo como aquel que supera los 600 metros, asignando al individuo en funcion a su permanencia en 
+el mismo. Esta medida mejora el sesgo observado en datos provenientes de plataformas de movilidad vehicular, que tienen una menor
+representatividad, dada la naturaleza propia el grupo observada, que excluye a quienes no tienen vehiculo."), 
+tags$p("Con cortes de 8 horas, puede además realizarse con mayor precisión el contraste entre roles disimiles como el laboral y el familiar de 
+cada individuo de la población en observación."),
+tags$p("Los gráficos muestran la dimension origen o destino de cada cantón, indicándose de manera dinamica la dirección en el movimiento de las curvas."),
+tags$p("MOVILIDAD HUMANA:"),
+tags$p("Muestra el movimiento humano ocurrido en un intervalo de tiempo de 8 horas. Para ello son empleados los datos facilitados 
+por la division DATA FOR GOOD de la empresa FACEBOOK. Los datos son anonimizados además de ser entregados a los investigadores en bloques agrupados
+por 4 criterios:"), 
+tags$p("(1) Cantidad de individuos pre crisis: Movimiento humano considerado como NORMAL medido por 45 dias antes del período CRISIS"),
+tags$p("(2) Cantidad de individuos crisis: Cantidad de individuos que realizaron movimiento en las últimas 8 horas, utilizando para ello el posicionamiento global."),
+tags$p("(3) Indice Zeta, que escala los datos con respecto a la desviación observada en cada grupo para hacerlos comparables entre Cantones. De esta forma,
+cada unidad representa la cantidad de desviaciones estandar que representa la observacion actual con respecto el periodo anterior a la crisis (normal).
+Este valor puede ser negativo, indicando una reducción del movimiento de las personas durante las 8 horas del dia correspondiente -objetivo que 
+persigue el distanciamiento social- o positivo, indicando una movilidad mayor a la esperada aun en momentos de normalidad."),
+tags$p("(4) Diferencia observada entre el periodo NORMAL y el periodo CRISIS.")),
+      easyClose = TRUE,
+      footer = modalButton("Aceptar")
+    ))
   })
 })

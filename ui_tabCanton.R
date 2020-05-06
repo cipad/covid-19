@@ -65,7 +65,7 @@ tabCanton = tabItem(
   fluidRow(
     column(
       12,
-      tags$h3("Movilidad Humana Cantonal")
+      tags$h3(tags$span("Movilidad Humana Cantonal"), actionLink("abrirInfoMovilidad", icon("question-circle-o")))
     )
   ),
   fluidRow(
