@@ -2,6 +2,7 @@ options(shiny.jquery.version=1)
 library(gentelellaShiny)
 library(bsplus)
 library(leaflet)
+library(dygraphs)
 
 source("bd_covid19.R")
 
