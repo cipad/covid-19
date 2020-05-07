@@ -1,6 +1,7 @@
 options(shiny.jquery.version=1)
 library(gentelellaShiny)
 library(bsplus)
+library(leaflet)
 
 source("bd_covid19.R")
 
