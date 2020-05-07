@@ -1,3 +1,9 @@
+options(shiny.jquery.version=1)
+library(gentelellaShiny)
+library(bsplus)
+
+source("bd_covid19.R")
+
 # Incluye todos los archivos con el prefijo ui para que esten disponibles al renderizar el app
 file.sources = list.files(pattern = "ui_.+\\.R")
 sapply(file.sources, source)
