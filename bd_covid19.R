@@ -109,9 +109,29 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   
   ds_movilidad$z_score_baja = ifelse(ds_movilidad$z_score<0, ds_movilidad$z_score^2, -1) 
   
-  # ds_movilidad$z_score_cuadrado = 2 * (ds_movilidad$z_score ^ 2)
+  dfRet = ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora", "z_score","z_score_sube","z_score_baja","canton_origen","canton_destino")]
   
-  ds_movilidad[ ds_movilidad$canton_origen != ds_movilidad$canton_destino, c("fecha","hora", "z_score","z_score_sube","z_score_baja","canton_origen","canton_destino","latitud_origen","longitud_origen","latitud_destino","longitud_destino")]
+  ds_cantones = readRDS(file.path(sDirDatos,"integradocantonal.rds"))
+  
+  dfRet = merge(dfRet,
+                ds_cantones[,c("canton", "latitud", "longitud")],
+                by.x = c("canton_origen"),
+                by.y = c("canton"),
+                all.x = T
+                )
+  names(dfRet)[names(dfRet)=="latitud"] = "latitud_origen"
+  names(dfRet)[names(dfRet)=="longitud"] = "longitud_origen"
+  
+  dfRet = merge(dfRet,
+                ds_cantones[,c("canton", "latitud", "longitud")],
+                by.x = c("canton_destino"),
+                by.y = c("canton"),
+                all.x = T
+  )
+  names(dfRet)[names(dfRet)=="latitud"] = "latitud_destino"
+  names(dfRet)[names(dfRet)=="longitud"] = "longitud_destino"
+  
+  dfRet
 }
 
 fx_cantones_covid = function(psFecha = ""){
