@@ -7,7 +7,7 @@ fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagios$fecha)
+    psFecha = max(ds_contagios$fecha, na.rm = T)
   }
   
   dfRet = ds_contagios[ ds_contagios$canton == psCanton & ds_contagios$fecha <= psFecha, 
@@ -22,7 +22,7 @@ fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDi
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagios$fecha)
+    psFecha = max(ds_contagios$fecha, na.rm = T)
   }
   psInicio = as.Date(psFecha) - pnDias
   
@@ -30,7 +30,7 @@ fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDi
                     union(c("fecha"),psVariable)]
 }
 
-# x = fx_corte_status_canton("ATENAS")
+# x = fx_corte_status_canton("ABANGARES")
 # names(x)
 fx_corte_status_canton = function(psCanton, psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
@@ -47,7 +47,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
                 summarise(ws_min = round(min(walkscore),1), ws_max = round(max(walkscore),1), ws_avg = round(mean(walkscore),1))
 
   if (psFecha == "") {
-    psFecha = max(ds_contagios$fecha)
+    psFecha = max(ds_contagios$fecha, na.rm = T)
   }
   
   dfRet = merge( ds_contagios[ds_contagios$fecha == psFecha & ds_contagios$canton == psCanton,],
@@ -83,7 +83,7 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
 
 # fx_movilidad_canton_mapa("ALAJUELITA", pnZScore = 0, psFecha = "2020-05-03", psHora = 16)
 fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora = ""){
-  #psCanton = "ABANGARES"
+  #psCanton = "PUNTARENAS"
   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
   
   if (psFecha == "") {
@@ -96,7 +96,7 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   
   # filtra por la hora
   if (psHora == ""){
-    psHora = max(ds_movilidad$hora)
+    psHora = max(ds_movilidad$hora, na.rm = T)
   } else {
     #psHora = 24
     psHora = as.numeric(psHora)-8
@@ -139,7 +139,7 @@ fx_cantones_covid = function(psFecha = ""){
   ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagios$fecha)
+    psFecha = max(ds_contagios$fecha, na.rm = T)
   }
   
   ds_contagios = ds_contagios[ ds_contagios$fecha == psFecha, c("canton")]
@@ -151,7 +151,7 @@ fx_diacovid_crc = function(psFecha = ""){
   ds_contagiospais = readRDS(file.path(sDirDatos,"st_contagiopais.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagiospais$fecha)
+    psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   
   ds_contagiospais[ ds_contagiospais$fecha == psFecha , c( "dia_covid19", "fecha")]
@@ -162,7 +162,7 @@ fx_historico_variable_pais = function(psVariable, psFecha = "", pnDias = 7){
   ds_contagiospais = readRDS(file.path(sDirDatos,"st_contagiopais.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagiospais$fecha)
+    psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   psInicio = as.Date(psFecha) - pnDias
   
@@ -176,7 +176,7 @@ fx_corte_status_pais = function(psFecha = ""){
   ds_contagiospais = readRDS(file.path(sDirDatos,"st_contagiopais.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagiospais$fecha)
+    psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   
   ds_contagiospais[ ds_contagiospais$fecha == psFecha, 
@@ -203,7 +203,7 @@ fx_corte_status_pais_acumulado = function(psFecha = "") {
   ds_contagiospais = readRDS(file.path(sDirDatos,"st_contagiopais.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagiospais$fecha)
+    psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   
   ds_contagiospais[ ds_contagiospais$fecha <= psFecha, 
@@ -220,7 +220,7 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   ds_contagioscanton = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
   
   if (psFecha == "") {
-    psFecha = max(ds_contagioscanton$fecha)
+    psFecha = max(ds_contagioscanton$fecha, na.rm = T)
   }
   
   if (pnAcumula == 0) {
@@ -238,37 +238,3 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   dfRet = dfRet[!is.na(dfRet$latitud) | !is.na(dfRet$longitud), ]
   dfRet
 }
-
-
-# Lista de preguntas ----
-fx_faq_preguntas = function() {
-  if(file.exists(file.path(sDirDatos,"faq_covid19.rds"))){
-    dfFAQs = readRDS(file.path(sDirDatos,"faq_covid19.rds"))
-    if (nrow(dfFAQs) > 0 ) {
-      dfFAQs = dfFAQs[order(dfFAQs$faq_id) & dfFAQs$habilitada == T, c("faq_id","titulo","title")]
-    } else {
-      dfFAQs = dfFAQs = data.frame(faq_id = numeric(0), titulo = character(0), title =character(0))
-    }
-  } else {
-    dfFAQs = dfFAQs = data.frame(faq_id = numeric(0), titulo = character(0), title =character(0))
-  }
-  dfFAQs
-}
-
-
-# Ejecuta funcion ----
-fx_faq_ejecuta = function(pnIdPregunta, pnTop=10) {
-  if(file.exists(file.path(sDirDatos,"faq_covid19.rds"))){
-    dfFAQs = readRDS(file.path(sDirDatos,"faq_covid19.rds"))
-    fx = eval(parse(text=dfFAQs[dfFAQs$faq_id == pnIdPregunta & dfFAQs$habilitada == T ,"operacion"]))
-    if (is.null(fx)) {
-      dfRet = do.call(fx, list(pnTop=pnTop))  
-    } else {
-      Ret = data.frame()
-    }
-  } else {
-    dfRet = data.frame()
-  }
-  dfRet
-}
-
