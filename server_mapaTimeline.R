@@ -1,9 +1,6 @@
-library(mapdeck)
 library(geojsonio)
 library(leaftime)
 source("bd_covid19.R")
-
-
 
 mapaTimeline = renderLeaflet({
   
