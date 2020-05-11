@@ -1,0 +1,348 @@
+{
+  "languages": [
+    "es",
+    "en"
+  ],
+  "translation": [
+    {
+      "es": "Centro de Investigación en Procesamiento y Análisis de Datos",
+      "en": "Research Center for Data Processing and Analytics"
+    },
+    {
+      "es": "Punto Inicial",
+      "en": "Starting Point"
+    },
+    {
+      "es": "Masculino:",
+      "en": "Male:"
+    },
+    {
+      "es": "Género",
+      "en": "Gender"
+    },
+    {
+      "es": "Adultos Mayores:",
+      "en": "Elderly:"
+    },
+    {
+      "es": "Adultos:",
+      "en": "Adult:"
+    },
+    {
+      "es": "Menores de Edad:",
+      "en": "Underage:"
+    },
+    {
+      "es": "Grupo de Edad",
+      "en": "Age Group"
+    },
+    {
+      "es": "Local:",
+      "en": "Local:"
+    },
+    {
+      "es": "Extranjero:",
+      "en": "Foreign:"
+    },
+    {
+      "es": "En Investigación:",
+      "en": "Under research:"
+    },
+    {
+      "es": "Nacionalidad",
+      "en": "Nationality"
+    },
+    {
+      "es": "Femenino:",
+      "en": "Female:"
+    },
+    {
+      "es": "Salón:",
+      "en": "Ward:"
+    },
+    {
+      "es": "UCI:",
+      "en": "ICU:"
+    },
+    {
+      "es": "Sección",
+      "en": "Section"
+    },
+    {
+      "es": "Filtrado de datos",
+      "en": "Data filters"
+    },
+    {
+      "es": "Fecha del Corte:",
+      "en": "Date:"
+    },
+    {
+      "es": "Cantón:",
+      "en": "City:"
+    },
+    {
+      "es": "Datos COVID-19",
+      "en": "COVID-19 Data"
+    },
+    {
+      "es": "Positivos",
+      "en": "Positives"
+    },
+    {
+      "es": "Pacientes con prueba positiva",
+      "en": "Patientes with positive result"
+    },
+    {
+      "es": "Recuperados",
+      "en": "Recovered"
+    },
+    {
+      "es": "Activos ",
+      "en": "Actives "
+    },
+    {
+      "es": "Pacientes COVID con prueba negativa",
+      "en": "COVID patient with negative result"
+    },
+    {
+      "es": "Fallecidos",
+      "en": "Fatalities"
+    },
+    {
+      "es": "Fallecimientos totales",
+      "en": "Total fatalities"
+    },
+    {
+      "es": "Población",
+      "en": "Population"
+    },
+    {
+      "es": "Censo 2016",
+      "en": "2016 Census"
+    },
+    {
+      "es": "Personas por km2",
+      "en": "Habitants per km2"
+    },
+    {
+      "es": "CIPAD",
+      "en": "CIPAD"
+    },
+    {
+      "es": "Contagios por km2",
+      "en": "Infections per km2"
+    },
+    {
+      "es": "Contagios / 1000 hab.",
+      "en": "Infections / 1000 hab."
+    },
+    {
+      "es": "Extensión (km2)",
+      "en": "Extension (km2)"
+    },
+    {
+      "es": "Estado de la Nación 2016",
+      "en": "2016 Estado de la Nación"
+    },
+    {
+      "es": "Mortalidad / 1000 hab.",
+      "en": "Mortality / 1000 hab."
+    },
+    {
+      "es": "INEC 2018",
+      "en": "2018 INEC"
+    },
+    {
+      "es": "Natalidad / 1000 hab.",
+      "en": "Natality / 1000 hab."
+    },
+    {
+      "es": "Nupcialidad / 1000 hab.",
+      "en": "Marriages / 1000 hab."
+    },
+    {
+      "es": "Índice Desarrollo Social",
+      "en": "Social Development Index"
+    },
+    {
+      "es": "Estado de la Nación 2017",
+      "en": "2017 Estado de la Nación"
+    },
+    {
+      "es": "Matrícula",
+      "en": "Registered Students"
+    },
+    {
+      "es": "MEP 2019",
+      "en": "2019 MEP"
+    },
+    {
+      "es": "Movilidad Humana Cantonal",
+      "en": "City Human Mobility"
+    },
+    {
+      "es": "Desarrollado por",
+      "en": "Developed by"
+    },
+    {
+      "es": "Datos de movilidad provistos por",
+      "en": "Mobility data provided by"
+    },
+    {
+      "es": "Filtros Mapas Movilidad",
+      "en": "Mobility Map Filters"
+    },
+    {
+      "es": "Intensidad Mínima de Movilidad:",
+      "en": "Minimum mobility intensity:"
+    },
+    {
+      "es": "Hora del día (8:00, 16:00, 24:00):",
+      "en": "Daytime in hours (8:00, 16:00, 24:00):"
+    },
+    {
+      "es": "Reducción de Movilidad Humana",
+      "en": "Human Mobility Reduction"
+    },
+    {
+      "es": "Incremento de Movilidad Humana",
+      "en": "Human Mobility Increasement"
+    },
+    {
+      "es": "Urbanismo",
+      "en": "Urbanity"
+    },
+    {
+      "es": "Urbanidad mínima",
+      "en": "Minimum Urbanity"
+    },
+    {
+      "es": "WalkScore®",
+      "en": "WalkScore®"
+    },
+    {
+      "es": "Urbanidad promedio",
+      "en": "Average Urbanity"
+    },
+    {
+      "es": "Urbanidad máxima",
+      "en": "Maximum Urbanity"
+    },
+    {
+      "es": "Minutos desde el punto 0:",
+      "en": "Minutes from starting point:"
+    },
+    {
+      "es": "Medio Transporte:",
+      "en": "Transportation type:"
+    },
+    {
+      "es": "A Pie",
+      "en": "Walk"
+    },
+    {
+      "es": "Bicicleta",
+      "en": "Bike"
+    },
+    {
+      "es": "Vehículo",
+      "en": "Car"
+    },
+    {
+      "es": "POSITIVOS ",
+      "en": "POSITIVES "
+    },
+    {
+      "es": "ACTIVOS ",
+      "en": "ACTIVES "
+    },
+    {
+      "es": "RECUPERADOS ",
+      "en": "RECOVERED "
+    },
+    {
+      "es": "FALLECIDOS ",
+      "en": "FATALITIES "
+    },
+    {
+      "es": "Datos Nuevos",
+      "en": "Last Report"
+    },
+    {
+      "es": "Nuevos pacientes con prueba positiva ▼",
+      "en": "New patients with positive test ▼"
+    },
+    {
+      "es": "casos activos ▼ ▼",
+      "en": "active cases ▼"
+    },
+    {
+      "es": "Población con COVID-19 activo ▼",
+      "en": "People with COVID-19 ▼"
+    },
+    {
+      "es": "Hospitalizados",
+      "en": "Hospitalized"
+    },
+    {
+      "es": "Pacientes en hospital ▼",
+      "en": "Hospitalized patients ▼"
+    },
+    {
+      "es": "Desde el último reporte del MS ▼",
+      "en": "Since last report ▼"
+    },
+    {
+      "es": "Datos Acumulados",
+      "en": "Accumulated Data"
+    },
+    {
+      "es": "Pacientes con prueba positiva ▼",
+      "en": "Patients with positive test ▼"
+    },
+    {
+      "es": "Pacientes en hospital al día de hoy ▼",
+      "en": "Total hospitalized patients ▼"
+    },
+    {
+      "es": "Fallecimientos totales ▼",
+      "en": "Total Fatalities ▼"
+    },
+    {
+      "es": "Contagios por Canton",
+      "en": "Infections by City"
+    },
+    {
+      "es": "Resumen de datos",
+      "en": "Data Summary"
+    },
+    {
+      "es": "# Casos por Estado",
+      "en": "# Infections by Status"
+    },
+    {
+      "es": "Inicio",
+      "en": "Home"
+    },
+    {
+      "es": "Canton",
+      "en": "City"
+    },
+    {
+      "es": "Bienvenido al",
+      "en": "Welcome"
+    },
+    {
+      "es": "Language",
+      "en": "Idioma"
+    },
+    {
+      "es": "Indicadores",
+      "en": "City Indicators"
+    },
+    {
+      "es": "Linea de Tiempo de Contagios",
+      "en": "Infections Timeline"
+    }
+  ]
+}

@@ -3,6 +3,10 @@ library(gentelellaShiny)
 library(bsplus)
 library(leaflet)
 library(dygraphs)
+library(shiny.i18n)
+
+i18n <- Translator$new(translation_json_path = "./www/translations.json")
+i18n$set_translation_language("es")
 
 source("bd_covid19.R")
 
@@ -23,5 +27,5 @@ ui = shinyUI(gentelellaPageCustom(
     )),
     tabs
   ),
-  footer = gentelellaFooter(leftText = tags$span(tags$span("Centro de Investigación en Procesamiento y Análisis de Datos"), tags$a(href="mailto:info@cipadcr.com","(info@cipadcr.com)")), rightText = "2020")
+  footer = gentelellaFooter(leftText = tags$span(tags$span(i18n$t("Centro de Investigación en Procesamiento y Análisis de Datos")), tags$a(href="mailto:info@cipadcr.com","(info@cipadcr.com)")), rightText = "2020")
 ))

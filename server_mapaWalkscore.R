@@ -46,7 +46,7 @@ mapaWS = function(canton, segundos, medio){
       addMarkers(lng=pLon0,
                  lat=pLat0,
                  icon = list(iconUrl=pImagen,iconSize=c(15,15)),
-                 label = "Punto Inicial",
+                 label = i18n$t("Punto Inicial"),
                  labelOptions = labelOptions(noHide = T))
       
   }) 

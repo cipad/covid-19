@@ -2,3 +2,7 @@
 	padding: 0px;
 	background: #fff;
 }
+
+.html-widget .leaflet-control.leaflet-timeline-control {
+    width: 300px;
+}

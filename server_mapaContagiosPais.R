@@ -23,7 +23,7 @@ mapaContagiosPais = renderLeaflet({
       color = "#333634",
       fillOpacity = 0.5,
       group = "SetDatos",
-      label = paste0("POSITIVOS ",SetDatos$canton," : ",SetDatos$positivos),
+      label = paste0(i18n$t("POSITIVOS "),SetDatos$canton," : ",SetDatos$positivos),
       labelOptions = labelOptions(noHide = F)
     ) %>%
     
@@ -35,7 +35,7 @@ mapaContagiosPais = renderLeaflet({
       color = "#2c2cb0",
       fillOpacity = 0.8,
       group = "SetDatos",
-      label = paste0("ACTIVOS ",SetDatos$canton," : ",SetDatos$activos),
+      label = paste0(i18n$t("ACTIVOS "),SetDatos$canton," : ",SetDatos$activos),
       labelOptions = labelOptions(noHide = F)
     ) %>%
     
@@ -47,7 +47,7 @@ mapaContagiosPais = renderLeaflet({
       color = "#2cab27",
       fillOpacity = 0.6,
       group = "SetDatos",
-      label = paste0("RECUPERADOS ",SetDatos$canton," : ",SetDatos$recuperados),
+      label = paste0(i18n$t("RECUPERADOS "),SetDatos$canton," : ",SetDatos$recuperados),
       labelOptions = labelOptions(noHide = F)
     ) %>%
     
@@ -59,7 +59,7 @@ mapaContagiosPais = renderLeaflet({
       color = "#9e0931",
       fillOpacity = 0.7,
       group = "SetDatos",
-      label = paste0("FALLECIDOS ",SetDatos$canton," : ",SetDatos$fallecidos),
+      label = paste0(i18n$t("FALLECIDOS "),SetDatos$canton," : ",SetDatos$fallecidos),
       labelOptions = labelOptions(noHide = F)
     ) %>%
     

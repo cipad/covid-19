@@ -7,6 +7,10 @@ library(shinyWidgets)
 library(bsplus)
 library(mapdeck)
 library(dplyr)
+library(shiny.i18n)
+
+i18n <- Translator$new(translation_json_path = "./www/translations.json")
+i18n$set_translation_language("es")
 
 # Incluye todos los archivos con el prefijo server para que esten disponibles al renderizar el app
 file.sources = list.files(pattern = "server_.+\\.R")
@@ -29,7 +33,7 @@ server = shinyServer(function(input, output, session) {
         tags$div(
           class = "profile_info",
           style = "padding-left: 23px",
-          tags$span("Bienvenido al"),
+          tags$span(i18n$t("Bienvenido al")),
           tags$h2("CIPAD")
         )
       ),
@@ -40,6 +44,8 @@ server = shinyServer(function(input, output, session) {
   output$graficoLineaAcumulada <- graficoLineaAcumulada
   
   output$mapaContagiosPais <- mapaContagiosPais
+  
+  output$mapaTimeline <- mapaTimeline
   
   output$mapaCasosCanton <- mapaCasosCanton
   
@@ -52,6 +58,8 @@ server = shinyServer(function(input, output, session) {
   output$recuperados_genero <- pie_recuperados_genero
   
   output$recuperados_edad <- pie_recuperados_edad
+  
+  output$activos_genero <- pie_activos_genero
   
   output$hospitalizados_nivel <- pie_hospitalizados_nivel
   
@@ -89,7 +97,7 @@ server = shinyServer(function(input, output, session) {
       cantones = fx_cantones_covid(format(input$fechaCorteCanton, "%Y-%m-%d"))
       updateSelectizeInput(
         session, "seleccionCanton",
-        'Cantón:',
+        i18n$t("Cantón:"),
         choices = cantones
       )
       if (length(cantones) > 0){
@@ -366,4 +374,5 @@ server = shinyServer(function(input, output, session) {
       footer = modalButton("Aceptar")
     ))
   })
+  
 })
