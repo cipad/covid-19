@@ -234,5 +234,41 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
                                    "positivos","recuperados","fallecidos","activos",
                                    "latitud","longitud") ]
   }
+  
+  dfRet = dfRet[!is.na(dfRet$latitud) | !is.na(dfRet$longitud), ]
   dfRet
 }
+
+
+# Lista de preguntas ----
+fx_faq_preguntas = function() {
+  if(file.exists(file.path(sDirDatos,"faq_covid19.rds"))){
+    dfFAQs = readRDS(file.path(sDirDatos,"faq_covid19.rds"))
+    if (nrow(dfFAQs) > 0 ) {
+      dfFAQs = dfFAQs[order(dfFAQs$faq_id) & dfFAQs$habilitada == T, c("faq_id","titulo","title")]
+    } else {
+      dfFAQs = dfFAQs = data.frame(faq_id = numeric(0), titulo = character(0), title =character(0))
+    }
+  } else {
+    dfFAQs = dfFAQs = data.frame(faq_id = numeric(0), titulo = character(0), title =character(0))
+  }
+  dfFAQs
+}
+
+
+# Ejecuta funcion ----
+fx_faq_ejecuta = function(pnIdPregunta, pnTop=10) {
+  if(file.exists(file.path(sDirDatos,"faq_covid19.rds"))){
+    dfFAQs = readRDS(file.path(sDirDatos,"faq_covid19.rds"))
+    fx = eval(parse(text=dfFAQs[dfFAQs$faq_id == pnIdPregunta & dfFAQs$habilitada == T ,"operacion"]))
+    if (is.null(fx)) {
+      dfRet = do.call(fx, list(pnTop=pnTop))  
+    } else {
+      Ret = data.frame()
+    }
+  } else {
+    dfRet = data.frame()
+  }
+  dfRet
+}
+
