@@ -1,3 +1,5 @@
+
+library(dplyr)
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
 # names(ds_contagios)
@@ -14,7 +16,7 @@ fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
                         c( "fecha",
                            "positivos","recuperados","fallecidos","activos") ]
   dfRet = dfRet[!is.na(dfRet$fecha),]
-  dfRet[order(dfRet$fecha),]
+  na.omit(dfRet[order(dfRet$fecha),])
 }
 
 
@@ -26,8 +28,8 @@ fx_historico_variable_canton = function(psCanton, psVariable, psFecha = "", pnDi
   }
   psInicio = as.Date(psFecha) - pnDias
   
-  ds_contagios[ ds_contagios$canton == psCanton & ds_contagios$fecha > psInicio & ds_contagios$fecha <= psFecha , 
-                    union(c("fecha"),psVariable)]
+  na.omit(ds_contagios[ ds_contagios$canton == psCanton & ds_contagios$fecha > psInicio & ds_contagios$fecha <= psFecha , 
+                    union(c("fecha"),psVariable)])
 }
 
 # x = fx_corte_status_canton("ABANGARES")
@@ -78,10 +80,10 @@ fx_corte_status_canton = function(psCanton, psFecha = ""){
   dfRet$tasa_densidad_contagio = round(dfRet$positivos / dfRet$extension,1)
   dfRet$densidad_poblacional = round(dfRet$poblacion / dfRet$extension,1)
   
-  dfRet
+  na.omit(dfRet)
 }
 
-# fx_movilidad_canton_mapa("ALAJUELITA", pnZScore = 0, psFecha = "2020-05-03", psHora = 16)
+# fx_movilidad_canton_mapa("ALAJUELITA", pnZScore = 0, psFecha = "2020-05-10", psHora = 16)
 fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora = ""){
   #psCanton = "PUNTARENAS"
   ds_movilidad = readRDS(file.path(sDirDatos,"st_movilidad.rds"))
@@ -131,7 +133,7 @@ fx_movilidad_canton_mapa = function(psCanton, pnZScore = 0, psFecha = "", psHora
   names(dfRet)[names(dfRet)=="latitud"] = "latitud_destino"
   names(dfRet)[names(dfRet)=="longitud"] = "longitud_destino"
   
-  dfRet
+  na.omit(dfRet)
 }
 
 fx_cantones_covid = function(psFecha = ""){
@@ -144,7 +146,7 @@ fx_cantones_covid = function(psFecha = ""){
   
   ds_contagios = ds_contagios[ ds_contagios$fecha == psFecha, c("canton")]
   
-  ds_contagios[order(ds_contagios)]
+  na.omit(ds_contagios[order(ds_contagios)])
 }
 
 fx_diacovid_crc = function(psFecha = ""){
@@ -154,7 +156,7 @@ fx_diacovid_crc = function(psFecha = ""){
     psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   
-  ds_contagiospais[ ds_contagiospais$fecha == psFecha , c( "dia_covid19", "fecha")]
+  na.omit(ds_contagiospais[ ds_contagiospais$fecha == psFecha , c( "dia_covid19", "fecha")])
 }
 
 
@@ -166,8 +168,8 @@ fx_historico_variable_pais = function(psVariable, psFecha = "", pnDias = 7){
   }
   psInicio = as.Date(psFecha) - pnDias
   
-  ds_contagiospais[ ds_contagiospais$fecha > psInicio & ds_contagiospais$fecha <= psFecha , 
-                    union(c( "dia_covid19", "fecha"),psVariable)]
+  na.omit(ds_contagiospais[ ds_contagiospais$fecha > psInicio & ds_contagiospais$fecha <= psFecha , 
+                    union(c( "dia_covid19", "fecha"),psVariable)])
 }
 
 
@@ -179,7 +181,7 @@ fx_corte_status_pais = function(psFecha = ""){
     psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   
-  ds_contagiospais[ ds_contagiospais$fecha == psFecha, 
+  na.omit(ds_contagiospais[ ds_contagiospais$fecha == psFecha, 
                     c( "dia_covid19", "fecha", 
                        "positivos",
                        "positivos_masculino", "positivos_femenino",
@@ -194,7 +196,7 @@ fx_corte_status_pais = function(psFecha = ""){
                        "hospitalizados",
                        "salon","uci",
                        "hospitalizados_nuevos",
-                       "salon_nuevos","uci_nuevos") ]
+                       "salon_nuevos","uci_nuevos") ] )
 }
 
 
@@ -206,12 +208,12 @@ fx_corte_status_pais_acumulado = function(psFecha = "") {
     psFecha = max(ds_contagiospais$fecha, na.rm = T)
   }
   
-  ds_contagiospais[ ds_contagiospais$fecha <= psFecha, 
+  na.omit(ds_contagiospais[ ds_contagiospais$fecha <= psFecha, 
                     c( "dia_covid19", "fecha", 
                        "positivos","recuperados","fallecidos",
                        "positivos_nuevos","recuperados_nuevos","fallecidos_nuevos", 
                        "hospitalizados","salon","uci",
-                       "hospitalizados_nuevos","salon_nuevos","uci_nuevos") ]
+                       "hospitalizados_nuevos","salon_nuevos","uci_nuevos") ] )
 }
 
 
@@ -236,5 +238,5 @@ fx_corte_status_pais_mapa = function(psFecha = "", pnAcumula = 0) {
   }
   
   dfRet = dfRet[!is.na(dfRet$latitud) | !is.na(dfRet$longitud), ]
-  dfRet
+  na.omit(dfRet)
 }
