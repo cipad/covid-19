@@ -22,9 +22,12 @@ ui = shinyUI(gentelellaPageCustom(
   body = gentelellaBody(
     includeCSS("dashboard.css"),
     tags$head(includeHTML(("analytics.html"))),
+    #tags$head(includeHTML(("articulate_head.html"))),
     tags$script(HTML(
       '$(document).ready(function(){$(".collapse").each((i, item) => { $(item).removeClass("in") });});'
     )),
+    #tags$div(id="webchat"),
+    #tags$body(includeHTML(("articulate_body.html"))),aps
     tabs
   ),
   footer = gentelellaFooter(leftText = tags$span(tags$span(i18n$t("Centro de Investigación en Procesamiento y Análisis de Datos")), tags$a(href="mailto:info@cipadcr.com","(info@cipadcr.com)")), rightText = "2020")

@@ -343,6 +343,18 @@
     {
       "es": "Linea de Tiempo de Contagios",
       "en": "Infections Timeline"
+    },
+    {
+      "es": "Pronóstico de Contagio por Cantón basado en la Movilidad Humana",
+      "en": "Forecast of Infection by City based on Human Mobility"
+    },
+    {
+      "es": "Probabilidad diaria",
+      "en": "Daily Probability"
+    },
+    {
+      "es": "*Este cantón no cuenta con datos suficientes para un cálculo preciso de probabilidades",
+      "en": "*This city doesn't have enough data to generate the infection probabilities"
     }
   ]
 }

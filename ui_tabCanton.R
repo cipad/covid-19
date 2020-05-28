@@ -151,6 +151,28 @@ tabCanton = tabItem(
   fluidRow(
     column(
       12,
+      tags$h4(i18n$t("Pronóstico de Contagio por Cantón basado en la Movilidad Humana"))
+    )
+  ),
+  fluidRow(
+    column(
+      12,
+       graph_box(dygraphOutput("graficoLineaProbabilidad"),
+                 boxtitle = i18n$t("Probabilidad diaria"),
+                 subtitle = "",
+                 datepicker = NULL),
+       style = "padding: 0;"
+    )
+  ),
+  fluidRow(
+    column(
+      12,
+      uiOutput("labelAlertaProbabilidad")
+    )
+  ),
+  fluidRow(
+    column(
+      12,
       tags$h4(i18n$t("Filtros Mapas Movilidad"))
     )
   ),

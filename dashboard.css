@@ -4,5 +4,9 @@
 }
 
 .html-widget .leaflet-control.leaflet-timeline-control {
-    width: 300px;
+  width: 300px;
+}
+
+#webchat > div > div {
+  z-index: 999999999999;
 }

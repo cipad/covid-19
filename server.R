@@ -261,6 +261,23 @@ server = shinyServer(function(input, output, session) {
       }
       
       output$mapaWS <- mapaWS(input$seleccionCanton, input$minutosWS * 60, input$medioWS)
+      
+      SetDatosProbabilidad = fx_canton_riesgo(input$seleccionCanton)
+      
+      if (nrow(SetDatosProbabilidad) > 0){
+        output$graficoLineaProbabilidad <- graficoLineaProbabilidad(SetDatosProbabilidad)
+        
+        if (SetDatosProbabilidad$excluir[1] == FALSE){
+          output$labelAlertaProbabilidad <- renderUI({
+            tags$p(i18n$t(""))
+          })
+        }
+        else {
+          output$labelAlertaProbabilidad <- renderUI({
+            tags$p(i18n$t("*Este cantón no cuenta con datos suficientes para un cálculo preciso de probabilidades"), style="font-size: 16px; color: #f44336; text-align: center;")
+          })
+        }
+      }
     }
   })
   
