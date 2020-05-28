@@ -2,6 +2,16 @@
 library(dplyr)
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
+fx_canton_riesgo = function(psCanton) {
+  
+  ds_prob = readRDS(file.path(sDirDatos,"st_prob_canton_riesgo.rds"))
+  
+  names(ds_prob) = c("canton","fecha","probabilidad","excluir")
+  
+  ds_prob = ds_prob[ds_prob$canton == psCanton,c("canton","fecha","probabilidad","excluir")]
+  ds_prob[order(ds_prob$fecha,decreasing = F),]
+}
+
 # names(ds_contagios)
 # fx_corte_status_canton_acumulado("ALAJUELA")
 fx_corte_status_canton_acumulado = function(psCanton, psFecha = "") {
