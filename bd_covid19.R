@@ -2,6 +2,28 @@
 library(dplyr)
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
+fx_canton_top_riesgo = function(pnTop = 10, pnDias=1) {
+  
+  ds_prob = readRDS(file.path(sDirDatos,"st_prob_canton_riesgo.rds"))
+  
+  names(ds_prob) = c("canton","fecha","probabilidad","excluir")
+  
+  head(ds_prob)
+  
+  ds_prob = reshape( direction= "wide",
+                     data = ds_prob,
+                     timevar = "fecha", 
+                     idvar = c("canton","excluir"),
+                     ids = "" )
+  
+  names(ds_prob) = gsub("probabilidad","prob", names(ds_prob))
+  
+  ds_prob = ds_prob[, c(names(ds_prob)[1:2],names(ds_prob)[3:10][order(names(ds_prob)[3:10])])]
+
+  head (ds_prob[order(ds_prob[,2], -ds_prob[,4]), c(1:2,4:(3+pnDias))], n = pnTop )
+}
+
+
 fx_canton_riesgo = function(psCanton) {
   
   ds_prob = readRDS(file.path(sDirDatos,"st_prob_canton_riesgo.rds"))
