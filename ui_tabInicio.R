@@ -18,6 +18,7 @@ tabInicio = tabItem(
   fluidRow(
     column(
       3,
+      class="tarjeta",
       accordionItem("positivos_nuevos", estatus_pais$positivos_nuevos, "fa fa-plus", i18n$t("Positivos"), i18n$t("Nuevos pacientes con prueba positiva ▼"), 
                     fluidRow(
                       column(
@@ -34,6 +35,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("recuperados_nuevos", estatus_pais$recuperados_nuevos, "fa fa-smile-o", i18n$t("Recuperados"), i18n$t("Pacientes COVID con prueba negativa ▼"), 
                     fluidRow(
                       column(
@@ -50,6 +52,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("hospitalizados_nuevos", estatus_pais$hospitalizados_nuevos, "fa fa-hospital-o", i18n$t("Hospitalizados"), i18n$t("Pacientes en hospital ▼"), 
                     fluidRow(
                       column(
@@ -66,6 +69,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("fallecidos_nuevos", estatus_pais$fallecidos_nuevos, "fa fa-frown-o", i18n$t("Fallecidos"), i18n$t("Desde el último reporte del MS ▼"), 
                     fluidRow(
                       column(
@@ -90,6 +94,7 @@ tabInicio = tabItem(
   fluidRow(
     column(
       3,
+      class="tarjeta",
       accordionItem("positivos", estatus_pais$positivos, "fa fa-plus", i18n$t("Positivos"), i18n$t("Pacientes con prueba positiva ▼"),
                     fluidRow(
                       column(
@@ -117,6 +122,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("recuperados", estatus_pais$recuperados, "fa fa-smile-o", i18n$t("Recuperados"), paste(estatus_pais$positivos - (estatus_pais$recuperados + estatus_pais$fallecidos), i18n$t("casos activos ▼")),
                     fluidRow(
                       column(
@@ -138,6 +144,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("hospitalizados", estatus_pais$hospitalizados, "fa fa-hospital-o", i18n$t("Hospitalizados"), i18n$t("Pacientes en hospital al día de hoy ▼"),
                     fluidRow(
                       column(
@@ -154,6 +161,7 @@ tabInicio = tabItem(
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("fallecidos", estatus_pais$fallecidos, "fa fa-frown-o", i18n$t("Fallecidos"), i18n$t("Fallecimientos totales ▼"),
                     fluidRow(
                       column(
@@ -177,7 +185,7 @@ tabInicio = tabItem(
   fluidRow(
     column(12,
       htmlOutput("tablaResumenCantonal"),
-      style="overflow-x: scroll"
+      style="overflow-x: scroll; width: 100%"
     )
   ),
   fluidRow(

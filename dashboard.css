@@ -10,3 +10,9 @@
 #webchat > div > div {
   z-index: 999999999999;
 }
+
+@media (max-width: 768px) {
+  .tarjeta {
+    width: 100%;
+  }
+}

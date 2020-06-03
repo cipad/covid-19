@@ -31,7 +31,8 @@ tabCanton = tabItem(
         min = fechaInicioDatosPorCanton,
         max = ultimafechaConDatos,
         language = "es"
-      )
+      ),
+      style="width: 270px"
     ),
     column(
       3,
@@ -42,7 +43,8 @@ tabCanton = tabItem(
         options = list(
           placeholder = 'Por favor seleccione un cantón'
         )
-      )
+      ),
+      style="width: 270px"
     ),
     column(
       6
@@ -60,14 +62,17 @@ tabCanton = tabItem(
   fluidRow(
     column(
       4,
+      class="tarjeta",
       accordionItem("positivosCanton", textOutput("estatus_canton_positivos"), "fa fa-plus", i18n$t("Positivos"), i18n$t("Pacientes con prueba positiva"),NULL)
     ),
     column(
       4,
+      class="tarjeta",
       accordionItem("recuperadosCanton", textOutput("estatus_canton_recuperados"), "fa fa-smile-o", i18n$t("Recuperados"), i18n$t("Pacientes COVID con prueba negativa"), NULL)
     ),
     column(
       4,
+      class="tarjeta",
       accordionItem("fallecidosCanton", textOutput("estatus_canton_fallecidos"), "fa fa-frown-o", i18n$t("Fallecidos"), i18n$t("Fallecimientos totales"),NULL)
     )
   ),
@@ -83,46 +88,56 @@ tabCanton = tabItem(
   fluidRow(
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonPoblacion", textOutput("indicador_poblacion"), "fa fa-users", i18n$t("Población"), i18n$t("Censo 2016"), NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonDensidadPoblacional", textOutput("indicador_densidad_poblacional"), "fa fa-street-view", i18n$t("Personas por km2"), i18n$t("CIPAD"),NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonDensidadContagio", textOutput("indicador_tasa_densidad_contagio"), "fa fa-fast-forward", i18n$t("Contagios por km2"), i18n$t("CIPAD"),NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonTasaContagio", textOutput("indicador_tasa_contagio"), "fa fa-forward", i18n$t("Contagios / 1000 hab."), i18n$t("CIPAD"), NULL)
     )
   ),
   fluidRow(
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonExtension", textOutput("indicador_extension"), "fa fa-map-o", i18n$t("Extensión (km2)"), i18n$t("Estado de la Nación 2016"),NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonMortalidad", textOutput("indicador_tasa_mortalidad"), "fa fa-user-times", i18n$t("Mortalidad / 1000 hab."), i18n$t("INEC 2018"),NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonNatalidad", textOutput("indicador_tasa_natalidad"), "fa fa-user-plus", i18n$t("Natalidad / 1000 hab."), i18n$t("INEC 2018"),NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonNupcialidad", textOutput("indicador_tasa_nupcialidad"), "fa fa-venus-mars", i18n$t("Nupcialidad / 1000 hab."), i18n$t("INEC 2018"),NULL)
     )
   ),
   fluidRow(
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonIDS", textOutput("indicador_ids_2017"), "fa fa-thermometer-2", i18n$t("Índice Desarrollo Social"), i18n$t("Estado de la Nación 2017"),NULL)
     ),
     column(
       3,
+      class="tarjeta",
       accordionItem("indicadorCantonMatricula", textOutput("indicador_matricula"), "fa fa-graduation-cap", i18n$t("Matrícula"), i18n$t("MEP 2019"), NULL)
     )
   ),
@@ -139,12 +154,12 @@ tabCanton = tabItem(
     column(
       6,
       style = "text-align: center",
-      tags$a(href="http://cipadcr.com/", target="_blank", tags$span(tags$span(i18n$t("Desarrollado por")), tags$img(src="./CIPAD.png", style="margin-left: 10px;")))
+      tags$a(href="http://cipadcr.com/", target="_blank", tags$span(tags$span(i18n$t("Desarrollado por")), tags$img(src="./CIPAD.png", style="margin-left: 10px; width: 200px")))
     ),
     column(
       6,
       style = "text-align: center",
-      tags$a(href="https://dataforgood.fb.com/", target="_blank", tags$span(tags$span(i18n$t("Datos de movilidad provistos por")),tags$img(src="./facebookDataForGood.svg", style="width: 300px")))
+      tags$a(href="https://dataforgood.fb.com/", target="_blank", tags$span(tags$span(i18n$t("Datos de movilidad provistos por")),tags$img(src="./facebookDataForGood.svg", style="width: 200px")))
     ),
     style = "margin: 30px 0px;"
   ),
@@ -241,14 +256,17 @@ tabCanton = tabItem(
   fluidRow(
     column(
       4,
+      class="tarjeta",
       accordionItem("indicadorCantonWSMin", textOutput("indicador_ws_min"), "fa fa-building-o", i18n$t("Urbanidad mínima"), i18n$t("WalkScore®"),NULL)
     ),
     column(
       4,
+      class="tarjeta",
       accordionItem("indicadorCantonWSAvg", textOutput("indicador_ws_avg"), "fa fa-building-o", i18n$t("Urbanidad promedio"), i18n$t("WalkScore®"), NULL)
     ),
     column(
       4,
+      class="tarjeta",
       accordionItem("indicadorCantonWSMax", textOutput("indicador_ws_max"), "fa fa-building-o", i18n$t("Urbanidad máxima"), i18n$t("WalkScore®"), NULL)
     )
   ),
