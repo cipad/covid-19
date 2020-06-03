@@ -201,19 +201,22 @@ tabCanton = tabItem(
         min = "2020-04-13",
         max = ultimaFechaConDatosMovilidad,
         language = "es"
-      )
+      ),
+      style="width: 270px"
     ),
     column(
       3,
       sliderInput("intensidadMovilidad", i18n$t("Intensidad Mínima de Movilidad:"),
                   min = 0, max = 3,
-                  value = 0, step = 1, ticks = FALSE)
+                  value = 0, step = 1, ticks = FALSE),
+      style="width: 270px"
     ),
     column(
       3,
       sliderInput("horaMovilidad", i18n$t("Hora del día (8:00, 16:00, 24:00):"),
                   min = 8, max = 24,
-                  value = 16, step = 8, ticks = FALSE)
+                  value = 16, step = 8, ticks = FALSE),
+      style="width: 270px"
     )
   ),
   fluidRow(
@@ -275,14 +278,16 @@ tabCanton = tabItem(
       3,
       sliderInput("minutosWS", i18n$t("Minutos desde el punto 0:"),
                   min = 15, max = 45,
-                  value = 15, step = 15, ticks = TRUE)
+                  value = 15, step = 15, ticks = TRUE),
+      style="width: 270px"
     ),
     column(
       3,
       radioButtons("medioWS", i18n$t("Medio Transporte:"),
                    c("A Pie" = "walk",
                      "Bicicleta" = "bike",
-                     "Vehículo" = "drive"), selected = "walk", inline = TRUE)
+                     "Vehículo" = "drive"), selected = "walk", inline = TRUE),
+      style="width: 270px"
     )
   ),
   fluidRow(
