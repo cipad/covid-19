@@ -2,6 +2,96 @@
 library(dplyr)
 sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
 
+fx_canton_top_resumen = function( psFecha = "", pnDias = 7, pnTop = 10, psVariable = "activos") {
+
+  # Contagio cantonal
+  ds_contagios = readRDS(file.path(sDirDatos,"st_contagiocanton.rds"))
+  
+  if (psFecha == "") {
+    psFecha = max(ds_contagios$fecha, na.rm = T)
+  }
+  psInicio = as.Date(psFecha) - pnDias
+  
+  dfRet = na.omit(ds_contagios[ ds_contagios$fecha > psInicio & ds_contagios$fecha <= psFecha, ])
+  
+  dfRet = dfRet[order(dfRet[,c("canton")], dfRet[,c("fecha")]), c("canton","fecha","positivos","fallecidos","recuperados","activos")]
+  
+  names(dfRet) = c("canton","fecha","p","f","r","a")
+  
+  ds_hist = reshape( direction= "wide",
+                     data = dfRet,
+                     timevar = "fecha", 
+                     idvar = c("canton"),
+                     ids = "" )
+  
+  ds_hist = ds_hist[, union(c(1), order( setdiff(names(ds_hist),c("canton")) )+1) ]
+  
+  # Proyeccion de riesgo cantonal
+  ds_prob = readRDS(file.path(sDirDatos,"st_prob_canton_riesgo.rds"))
+  
+  names(ds_prob) = c("canton","fecha","z","excluir")
+  
+  ds_prob = reshape( direction= "wide",
+                     data = ds_prob,
+                     timevar = "fecha", 
+                     idvar = c("canton","excluir"),
+                     ids = "" )
+  
+  ds_prob = ds_prob[, c(names(ds_prob)[1:2],names(ds_prob)[3:10][order(names(ds_prob)[3:10])])]
+  
+  ds_prop = ds_prob[order(ds_prob[,2], -ds_prob[,4]), c(1:2,4:(3+pnDias))]
+  
+  
+  ds_deltas = merge( x = dfRet[dfRet$fecha == max(dfRet$fecha), c(1,3:6)],
+                     y = dfRet[dfRet$fecha == min(dfRet$fecha), c(1,3:6)],
+                     by = c("canton"),
+                     all.x = T)
+  
+  ds_deltas = data.frame( canton = ds_deltas[,c(1)], 
+                          delta_positivos = ds_deltas$p.x - ifelse(is.na(ds_deltas$p.y),0,ds_deltas$p.y),
+                          delta_fallecidos = ds_deltas$f.x - ifelse(is.na(ds_deltas$f.y),0,ds_deltas$f.y),
+                          delta_recuperados = ds_deltas$r.x - ifelse(is.na(ds_deltas$r.y),0,ds_deltas$r.y),
+                          delta_activos = ds_deltas$a.x - ifelse(is.na(ds_deltas$a.y),0,ds_deltas$a.y),
+                          stringsAsFactors = F )
+  
+  
+  # Consolida datos actuales con riesgo probable
+  df_Consolidado = merge( x = dfRet[dfRet$fecha == max(dfRet$fecha), c(1,3:6)],
+                          y = ds_prop[!ds_prop$excluir,c(1,3)],
+                          by = c("canton"),
+                          all.x = T)
+  
+  names(df_Consolidado)[2:6] = c("positivos","fallecidos","recuperados","activos","probabilidad_riesgo")
+  
+  # Agrega los deltas
+  df_Consolidado = merge( x = df_Consolidado,
+                          y = ds_deltas,
+                          by = c("canton"),
+                          all.x = T)
+  
+  
+  # Agrega historico
+  df_Consolidado = merge( x = df_Consolidado,
+                          y = ds_hist,
+                          by = c("canton"),
+                          all.x = T)
+  
+  # Agrega probabilidad de riesgo
+  df_Consolidado = merge( x = df_Consolidado,
+                          y = ds_prop,
+                          by = c("canton"),
+                          all.x = T)
+  
+  # names(df_Consolidado)
+  # psVariable = "delta_positivos"
+  
+  df_Consolidado = df_Consolidado[order(df_Consolidado[,which(names(df_Consolidado) == psVariable)],decreasing = T),]
+  
+  row.names(df_Consolidado) = seq.int(from = 1, to = nrow(df_Consolidado), by = 1)
+  head( df_Consolidado, n = pnTop )
+}
+
+
 fx_canton_top_riesgo = function(pnTop = 10, pnDias=1) {
   
   ds_prob = readRDS(file.path(sDirDatos,"st_prob_canton_riesgo.rds"))
