@@ -1,5 +1,6 @@
 source("bd_covid19.R")
 library(shiny.i18n)
+library(formattable)
 
 i18n <- Translator$new(translation_json_path = "./www/translations.json")
 i18n$set_translation_language("es")
@@ -171,11 +172,23 @@ tabInicio = tabItem(
     tags$hr()
   ),
   fluidRow(
+    tags$h3(i18n$t("Resumen Cantonal"))
+  ),
+  fluidRow(
+    column(12,
+      htmlOutput("tablaResumenCantonal"),
+      style="overflow-x: scroll"
+    )
+  ),
+  fluidRow(
+    tags$hr()
+  ),
+  fluidRow(
     tags$h3(i18n$t("Contagios por Canton"))
   ),
   fluidRow(
     column(12,
-           mapdeckOutput("mapaCasosCanton", height = 470)
+      mapdeckOutput("mapaCasosCanton", height = 470)
     )
   ),
   fluidRow(

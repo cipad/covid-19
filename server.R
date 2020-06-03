@@ -41,6 +41,8 @@ server = shinyServer(function(input, output, session) {
     )
   })
   
+  output$tablaResumenCantonal <- tablaResumenCantonal()
+  
   output$graficoLineaAcumulada <- graficoLineaAcumulada
   
   output$mapaContagiosPais <- mapaContagiosPais
