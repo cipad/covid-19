@@ -40,6 +40,7 @@
   }
   
   .dygraph-legend {
+    width: 260px !important;
     left: 0px !important;
   }
 }
