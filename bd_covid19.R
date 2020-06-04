@@ -1,6 +1,6 @@
 
 library(dplyr)
-sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/","c:\\Temporal\\CV19\\inputdata\\")
+sDirDatos = ifelse(Sys.info()["sysname"] == "Linux","./inputdata/",(ifelse(Sys.info()["sysname"]  == "Darwin", "./inputdata/","c:\\Temporal\\CV19\\inputdata\\")))
 
 fx_canton_top_resumen = function( psFecha = "", pnDias = 7, pnTop = 10, psVariable = "activos") {
 
