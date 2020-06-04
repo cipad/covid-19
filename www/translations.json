@@ -355,6 +355,10 @@
     {
       "es": "*Este cantón no cuenta con datos suficientes para un cálculo preciso de probabilidades",
       "en": "*This city doesn't have enough data to generate the infection probabilities"
+    },
+    {
+      "es": "Resumen Cantonal",
+      "en": "Summary by City"
     }
   ]
 }

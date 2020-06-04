@@ -15,4 +15,31 @@
   .tarjeta {
     width: 100%;
   }
+  
+  #mapaCasosCanton {
+    width: 290px !important;
+    position: initial !important;
+  }
+  
+  #mapaTimeline {
+    width: 290px !important;
+  }
+  
+  #mapaMovilidadCantonReduccion {
+    width: 290px !important;
+    position: initial !important;
+  }
+  
+  #mapaMovilidadCantonIncremento {
+    width: 290px !important;
+    position: initial !important;
+  }
+  
+  #mapaWS {
+    width: 290px !important;
+  }
+  
+  .dygraph-legend {
+    left: 0px !important;
+  }
 }
