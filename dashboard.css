@@ -17,26 +17,26 @@
   }
   
   #mapaCasosCanton {
-    width: 290px !important;
+    width: 255px !important;
     position: initial !important;
   }
   
   #mapaTimeline {
-    width: 290px !important;
+    width: 255px !important;
   }
   
   #mapaMovilidadCantonReduccion {
-    width: 290px !important;
+    width: 255px !important;
     position: initial !important;
   }
   
   #mapaMovilidadCantonIncremento {
-    width: 290px !important;
+    width: 255px !important;
     position: initial !important;
   }
   
   #mapaWS {
-    width: 290px !important;
+    width: 255px !important;
   }
   
   .dygraph-legend {
