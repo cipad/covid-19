@@ -11,7 +11,8 @@ mapaCasosCanton = renderMapdeck({
     style = mapdeck_style("light"),
     pitch = 60,
     location = c(-84.3, 9.5),
-    zoom=10
+    zoom=10,
+    token="pk.eyJ1IjoibWlub3Jib25pbGxhZ29tZXoiLCJhIjoiY2s5cGF4dzN4MDk2MjNkb2RxbjNrcDZ2aiJ9.fSjAKiPHJyCbtkD6u7hRvA"
   ) 
   
   mapa%>% 

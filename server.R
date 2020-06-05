@@ -5,7 +5,6 @@ library(shiny)
 library(gentelellaShiny)
 library(shinyWidgets)
 library(bsplus)
-library(mapdeck)
 library(dplyr)
 library(shiny.i18n)
 
@@ -20,9 +19,6 @@ source("bd_covid19.R")
 
 # LECTURA DATOS ---- 
 estatus_pais = fx_corte_status_pais()
-
-key="pk.eyJ1IjoibWlub3Jib25pbGxhZ29tZXoiLCJhIjoiY2s5cGF4dzN4MDk2MjNkb2RxbjNrcDZ2aiJ9.fSjAKiPHJyCbtkD6u7hRvA"
-set_token(key)
 
 server = shinyServer(function(input, output, session) {
   
@@ -93,6 +89,15 @@ server = shinyServer(function(input, output, session) {
   indicador_ws_avg <- reactiveVal("-")
   indicador_ws_max <- reactiveVal("-")
   
+  
+  output$mapaMovilidadCantonReduccion = renderMapdeck({
+    mapdeck( style = mapdeck_style("dark"), pitch = 10, location = c(-84.1751639,9.9295438), zoom = 5 )
+  }) 
+  
+  output$mapaMovilidadCantonIncremento = renderMapdeck({
+    mapdeck( style = mapdeck_style("dark"), pitch = 10, location = c(-84.1751639,9.9295438), zoom = 5 )
+  }) 
+  
   observeEvent(input$fechaCorteCanton, {
     
     if (length(input$fechaCorteCanton) > 0){
@@ -128,19 +133,11 @@ server = shinyServer(function(input, output, session) {
           
           SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
           
-          mapaMovilidadCantonReduccion = mapaMovilidadCanton(SetDatos, "z_score_baja")
-          
-          output$mapaMovilidadCantonReduccion = renderMapdeck({
-            mapaMovilidadCantonReduccion
-          })
+          mapaMovilidadCanton(SetDatos, "z_score_baja", "mapaMovilidadCantonReduccion")
           
           SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
           
-          mapaMovilidadCantonIncremento = mapaMovilidadCanton(SetDatos, "z_score_sube")
-          
-          output$mapaMovilidadCantonIncremento = renderMapdeck({
-            mapaMovilidadCantonIncremento
-          }) 
+          mapaMovilidadCanton(SetDatos, "z_score_sube", "mapaMovilidadCantonIncremento")
         }
         
         output$mapaWS <- mapaWS(cantones[1], input$minutosWS * 60, input$medioWS)
@@ -247,19 +244,12 @@ server = shinyServer(function(input, output, session) {
       if (nrow(SetDatos) > 0){
         SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
         
-        mapaMovilidadCantonReduccion = mapaMovilidadCanton(SetDatos, "z_score_baja")
-        
-        output$mapaMovilidadCantonReduccion = renderMapdeck({
-          mapaMovilidadCantonReduccion
-        }) 
+        mapaMovilidadCanton(SetDatos, "z_score_baja", "mapaMovilidadCantonReduccion")
         
         SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
         
-        mapaMovilidadCantonIncremento = mapaMovilidadCanton(SetDatos, "z_score_sube")
+        mapaMovilidadCanton(SetDatos, "z_score_sube", "mapaMovilidadCantonIncremento")
         
-        output$mapaMovilidadCantonIncremento = renderMapdeck({
-          mapaMovilidadCantonIncremento
-        }) 
       }
       
       output$mapaWS <- mapaWS(input$seleccionCanton, input$minutosWS * 60, input$medioWS)
@@ -290,19 +280,12 @@ server = shinyServer(function(input, output, session) {
       
       SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
       
-      mapaMovilidadCantonReduccion = mapaMovilidadCanton(SetDatos, "z_score_baja")
-      
-      output$mapaMovilidadCantonReduccion = renderMapdeck({
-        mapaMovilidadCantonReduccion
-      })
+      mapaMovilidadCanton(SetDatos, "z_score_baja", "mapaMovilidadCantonReduccion")
       
       SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
       
-      mapaMovilidadCantonIncremento = mapaMovilidadCanton(SetDatos, "z_score_sube")
-      
-      output$mapaMovilidadCantonIncremento = renderMapdeck({
-        mapaMovilidadCantonIncremento
-      }) 
+      mapaMovilidadCanton(SetDatos, "z_score_sube", "mapaMovilidadCantonIncremento")
+
     }
   })
   
@@ -313,19 +296,12 @@ server = shinyServer(function(input, output, session) {
       
       SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
       
-      mapaMovilidadCantonReduccion = mapaMovilidadCanton(SetDatos, "z_score_baja")
-      
-      output$mapaMovilidadCantonReduccion = renderMapdeck({
-        mapaMovilidadCantonReduccion
-      })
+      mapaMovilidadCanton(SetDatos, "z_score_baja", "mapaMovilidadCantonReduccion")
       
       SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
       
-      mapaMovilidadCantonIncremento = mapaMovilidadCanton(SetDatos, "z_score_sube")
+      mapaMovilidadCanton(SetDatos, "z_score_sube", "mapaMovilidadCantonIncremento")
       
-      output$mapaMovilidadCantonIncremento = renderMapdeck({
-        mapaMovilidadCantonIncremento
-      }) 
     }
   })
   
@@ -336,19 +312,12 @@ server = shinyServer(function(input, output, session) {
       
       SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
       
-      mapaMovilidadCantonReduccion = mapaMovilidadCanton(SetDatos, "z_score_baja")
-      
-      output$mapaMovilidadCantonReduccion = renderMapdeck({
-        mapaMovilidadCantonReduccion
-      })
-      
+      mapaMovilidadCanton(SetDatos, "z_score_baja", "mapaMovilidadCantonReduccion")
+
       SetDatos$Info=paste("<b>", SetDatos$canton_origen, " - " , SetDatos$canton_destino,round(SetDatos$z_score,1),"</b>" )
       
-      mapaMovilidadCantonIncremento = mapaMovilidadCanton(SetDatos, "z_score_sube")
-      
-      output$mapaMovilidadCantonIncremento = renderMapdeck({
-        mapaMovilidadCantonIncremento
-      }) 
+      mapaMovilidadCanton(SetDatos, "z_score_sube", "mapaMovilidadCantonIncremento")
+
     }
   })
   

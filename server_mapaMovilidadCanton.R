@@ -1,7 +1,10 @@
 library(mapdeck)
 
-mapaMovilidadCanton = function(datos, variable){
-  mapdeck( style = mapdeck_style("dark"), pitch = 10 ) %>%
+mapaMovilidadCanton = function(datos, variable, mapId){
+  mapdeck_update(map_id = mapId) %>%
+    clear_animated_arc(
+      layer_id = "arc_layer"
+    ) %>%
     add_animated_arc(
       data = datos
       , layer_id =     "arc_layer"
@@ -16,5 +19,6 @@ mapaMovilidadCanton = function(datos, variable){
       , highlight_colour = "#AAFFFFFF"
       , frequency = 1
       , trail_length = 0.3
-      , animation_speed = 0.1)
+      , animation_speed = 0.1
+    )
 }
