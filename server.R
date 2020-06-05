@@ -20,6 +20,9 @@ source("bd_covid19.R")
 # LECTURA DATOS ---- 
 estatus_pais = fx_corte_status_pais()
 
+key="pk.eyJ1IjoibWlub3Jib25pbGxhZ29tZXoiLCJhIjoiY2s5cGF4dzN4MDk2MjNkb2RxbjNrcDZ2aiJ9.fSjAKiPHJyCbtkD6u7hRvA"
+set_token(key)
+
 server = shinyServer(function(input, output, session) {
   
   output$profile <- renderUI({
@@ -91,7 +94,7 @@ server = shinyServer(function(input, output, session) {
   
   
   output$mapaMovilidadCantonReduccion = renderMapdeck({
-    mapdeck( style = mapdeck_style("dark"), pitch = 10, location = c(-84.1751639,9.9295438), zoom = 5 )
+    mapdeck( style = mapdeck_style("dark"), pitch = 10, location = c(-84.1751639,9.9295438), zoom = 5 ) 
   }) 
   
   output$mapaMovilidadCantonIncremento = renderMapdeck({
